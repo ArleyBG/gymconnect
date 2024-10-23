@@ -1,0 +1,35 @@
+{# Heredar layout #}
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+    <img class="img-inicio" src="{% static 'images/pagina_inicio.jpg' %}">
+    <div class="sede">
+        <h3>Encuentra la sede más cercana</h3>
+        <form class="search" method="get" action="">
+
+            {% csrf_token %}
+            <input type="text" name="ciudad" placeholder="Ingresa el nombre de la ciudad">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="body">
+        <div class="item">
+            <h3>Elige tu plan y entrena con nosotros</h3>
+            <img src="{% static 'images/entrenador.jpg' %}">
+        </div>
+        <div class="item">
+            <p><a href="#">¡Inscribete ya!</a><p>
+            <img src="{% static 'images/suscribirse.png' %}">
+        </div>
+        <div class="item">
+            <h3>Elige tu plan y entrena con nosotros</h3>
+            <img src="{% static 'images/membresia.png' %}">
+        </div>
+    </div>
+{% endblock %}            

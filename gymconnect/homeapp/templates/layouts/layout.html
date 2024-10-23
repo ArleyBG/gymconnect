@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {# cargar static #}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_homeapp.css' %}">
+    <title>
+        {% block title %}
+            {# Aquí va el titulo de la ventana de cada pagina #}
+        {% endblock %}
+    </title>
+</head>
+
+{# Encabezado de las paginas #}
+<header>
+    <div id="logogym">
+        <img src="{% static 'images/logo1.png' %}" alt="logo de Gymconnect" title="GYMCONNECT"> 
+        <a href="{% url 'inicio' %}"><h1>GYMCONNECT</h1></a>
+    </div>
+
+    <nav>
+        <ul class="main">
+            <li>
+                <a href="#"><i class="fa-solid fa-gear"></i></a>
+                <ul class="submain">
+                    <li>
+                        <a href="{% url 'index' %}">Salir</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{# Contenido de las paginas #}
+<body>
+    <div id="content">
+        <div class="box">
+            <div class="columna-left">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="message">
+                    <i class="fas fa-check-circle"></i>{{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if user.name %}
+                <h3>{{home}} {{ request.user.name }}<i class="fa-regular fa-face-laugh-wink"></i></h3>
+                {% endif %}
+
+                <p>Administrador<i class="i fa-solid fa-user-tie"></i></p>
+
+                <nav class="navegacion">
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Administración<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Ingreso por huella dactilar</a></li>
+                                <li><a href="{% url 'empleado' %}">Empleados</a></li>
+                                <li><a href="#">Clientes</a></li>
+                                <li><a href="#">Asistencia</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Clientes<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Clientes</a></li>
+                                <li><a href="#">Evolución</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Pagos<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Ventas</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Productos<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Membresías</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Reservaciones<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Clases</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li>
+                            <a href="#" class="accordion-toggle">Inventario<span class="arrow">&#9660;</span></a>
+                            <ul class="submenu">
+                                <li><a href="#">Productos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="columna-right">
+            {% block content %}
+                {# contenido de las paginas #}
+            {% endblock %}
+        </div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

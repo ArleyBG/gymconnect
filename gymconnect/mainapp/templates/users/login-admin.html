@@ -1,0 +1,46 @@
+{% extends "layout/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="letter">
+            <span>
+                <h1>GYMCONNECT</h1>
+            <span>
+            <p>GYMCONNECT te ayuda a optimizar la administración
+            y mejorar la experiencia de los usuarios.<br>
+            ¡Comencemos en este viaje hacia un gimnasio mas organizado y exitoso!  
+            </p>
+        </div>    
+
+        <form class='form' method="post" action="">
+            <h3>{{ user }}</h3><i class="i fa-solid fa-user-tie"></i>
+
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="errors">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% csrf_token %}
+
+            {% for field in login_form %}
+                <div class="form-login">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <button class="btn-sesion" type="submit">Inicar sesión</button>
+            <a href="#" class="btn-forget">¿Olvidaste tu contraseña?</a>
+            <a href="{% url 'administrador' %}" class=" btn-access">Registrate</a>
+        </form>
+    </div>
+
+{% endblock %}

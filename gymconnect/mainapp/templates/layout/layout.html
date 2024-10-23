@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {# cargar static #}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_mainapp.css' %}">
+    <title>
+        {% block title %}
+            {# Aqui va el titulo de la ventana de cada pagina #}
+        {% endblock %}
+    </title>
+</head>
+
+{# Encabezado de las paginas #}
+<header>
+    <div id="logogym">
+        <img src="{% static 'images/logo1.png' %}" alt="logo de Gymconnect" title="GYMCONNECT"> 
+        <a href="{% url 'index' %}"><h1>GYMCONNECT</h1></a>
+    </div>
+    
+    {# Menu #}
+    {# si el nombre de la url actual no es """" se mostrara u ocultara la barra de navegacion #}
+    {% if request.resolver_match.url_name != 'administrador' and request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'inicio' %}
+        <div class="menu-login"> 
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-bars"></i></a>
+                        <ul class="submenu">
+                            <h4>GYMCONNECT<h4>
+                            <li>
+                                <a class="btn" href="{% url 'administrador' %}">!Inscribete ya¡</a>
+                            </li>
+                            <div class="sublist">
+                                <li>
+                                    <a href="#">Reservas</a>
+                                </li>
+                                <li>
+                                    <a href="#">Productos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Membresias</a>
+                                </li>
+                                <li>
+                                    <a href="#">Promociones</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contactanos</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+
+                    {# Registro #}
+                    <li>
+                        <a href="#">Registro</a>
+                        <ul class="submenu">
+                            <h4>¿Quien eres?</h4>
+                            <div class="register">
+                                <li>
+                                    <a href="{% url 'administrador' %}"><i class="i fa-solid fa-user-tie"></i>Administrador</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-solid fa-user"></i>Empleado</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-solid fa-user-group"></i>Cliente</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+
+                    {# LOGIN #}
+                    <li>
+                        <a href="{% url 'login' %}">Iniciar Sesión</a>
+                        <ul class="submenu">
+                            <h4>¿Quién eres?</h4>
+                            <div class="register">
+                                <li>
+                                    <a href="{% url 'login' %}"><i class="fa-solid fa-user-tie"></i>Administrador</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-solid fa-user"></i>Empleado</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-solid fa-user-group"></i>Cliente</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+</header>
+
+{# Contenido de las paginas #}
+<body>
+    <div id="content">
+        <div class="box">
+            {% block content %}
+                {# contenido de las paginas #}
+            {% endblock %}
+        </div>
+    </div>
+    
+    {# Footer de las pages #}
+    <footer>
+        <div class="logofooter">
+            <p>GYM</p><img class="image" src="{% static 'images/logo1.png' %}"><p>CONNECT</p>
+        </div>
+
+        <hr>
+
+        <div class="contenedor">
+            <div class="columna1">
+                <ul>
+                    <h3>Planes</h3>
+                    <li>
+                        <a href="#">SEDES</a>
+                    </li>
+                    <li>
+                        <a href="#">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="#">LEGAL</a>
+                    </li>
+                    <li>
+                        <a href="#">CONTACTO</a>
+                    </li>
+                <ul>
+            </div>
+
+            <div class="columna2">
+                <ul>
+                    <h3>TRABAJA CON NOSOTROS</h3>
+                    <li>
+                        <a href="#">SUPERINTENDENCIA DE INDUSTRIA Y COMERCIO</a>
+                    </li>
+                    <li>
+                        <a href="#">POLITICAS DE PRIVACIDAD</a>
+                    </li>
+                    <li>
+                        <a href="#">POLITICAS DE DATOS PERSONALES</a>
+                    </li>
+                    <li>
+                        <a href="#">TERMINOS Y CONDICIONES</a>
+                    </li>
+                <ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="social">
+            <ul>
+                <h3>Siguenos en nuestras redes sociales</h3>
+                <div>
+                    <li>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <hr>
+        <p class="arley">Gymconnect &copy; Made by Arley Benavides Giraldo - {% now "d/m/Y h:m:s"  %}</p>
+    </footer>
+</body>
+</html>

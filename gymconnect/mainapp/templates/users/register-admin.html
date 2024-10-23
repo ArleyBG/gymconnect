@@ -1,0 +1,32 @@
+{# Heredar layout #}
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+    <h2>{{title}}</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+
+        {% for field in register_form %}
+            <div class="form-row">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <ul>
+                        {% for error in field.errors %}
+                            <li class="errors">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button class="btn" type="submit">Registrarse</button>
+    </form>
+
+{% endblock %}

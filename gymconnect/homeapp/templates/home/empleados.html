@@ -1,0 +1,58 @@
+{% extends "layouts/layout.html" %}
+{% load static %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    <form class="buscar" method="GET" action="{% url 'buscar_empleado' %}">
+        <h3>{{ title }}</h3>
+        {% csrf_token %}
+        <input type="text" name="buscar_empleado" placeholder="Buscar empleado por nombre o cédula">
+        <button class="" type="submit">Buscar</button>
+    </form>
+    <div class="datos">
+        {% if search_performed %}
+            {% if user_data %}
+                <h3>Datos del usuario</h3>
+                <p>Nombre: {{ user_data.name }}</p>
+                <p>Apellidos: {{ user_data.last_name }}</p>
+                <p>Cc: {{ user_data.identification }}</p>
+                <p>Email: {{ user_data.email }}</p>
+                <p>Genero: {{ user_data.gender }}</p>
+                <p>Fecha de nacimiento: {{ user_data.date_birth }}</p>
+                <p>Ocupacion: {{ user_data.occupation }}</p>
+                <p>Salario: {{ user_data.payment }}</p>
+                <p>Celular: {{ user_data.phone }}</p>
+                {% if user_data.id %}
+                    <a class="btn5" href="{% url 'eliminar_empleado' user_data.id %}">Eliminar empleado</a>
+                    <button class="btn3" type="submit">Actualizar datos</button>
+                {% endif %}
+            {% else %}
+                <p class="messa">¡No se encontró ningún empleado con ese nombre!</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    
+    {% if messages %}
+        {% for messa in messages %}
+            <p class="messa">{{messa}}</p>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="btns">
+        <a href="#" class="btn4" onclick="mostrarFormulario()">Registrar empleado</a>
+    </div>
+
+    <form method="post" id="formularioRegistro" class"formulario-oculto" action="">
+        {% csrf_token %}
+        <div class="row">
+            {{ form }}
+        </div>
+        <div class="btn-form">
+            <button class="btn" type="submit">Registrar</button>
+        </div>
+    </form>
+
+{% endblock %}
