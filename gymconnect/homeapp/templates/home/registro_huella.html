@@ -1,0 +1,36 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+    <form class="search" method="get" action="">
+        <h3>Clientes</h3>
+        {% csrf_token %}
+        <input type="text" name="buscar" placeholder="Buscar cliente por nombre o cédula">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div class="datos">
+        {% if search %}
+            {% if user_data %}
+                <h3>Datos del usuario:</h3>
+                <p>id: {{user_data.id}}</p>
+                <p>Nombre del usuario: {{user_data.Nombre}}</p>
+                <p>Cédula de ciudadanía: {{user_data.CC}}</p>
+                <p>Correo electrónico: {{user_data.Correo}}</p>
+                <p>Genero: {{user_data.Genero}}</p>
+                <p>Fecha de cumpleaños: {{user_data.Cumpleaños}}</p>
+                <p>Celular: {{user_data.Celular}}</p>
+                <button class="btn1" type="submit">Registar huella</button>
+            {% else %}
+                <p>¡El usuario no existe!</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    
+{% endblock %}

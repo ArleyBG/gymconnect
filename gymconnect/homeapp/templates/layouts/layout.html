@@ -59,10 +59,10 @@
                         <li>
                             <a href="#" class="accordion-toggle">Administración<span class="arrow">&#9660;</span></a>
                             <ul class="submenu">
-                                <li><a href="#">Ingreso por huella dactilar</a></li>
+                                <li><a href="{% url 'registro_huella' %}">Ingreso por huella dactilar</a></li>
                                 <li><a href="{% url 'empleado' %}">Empleados</a></li>
-                                <li><a href="#">Clientes</a></li>
-                                <li><a href="#">Asistencia</a></li>
+                                <li><a href="{% url 'cliente' %}">Clientes</a></li>
+                                <li><a href="{% url 'inicio' %}">Asistencia</a></li> {# Aquí se redirige a la página de inicio por el momento #}
                             </ul>
                         </li>
                     </ul>
@@ -70,7 +70,7 @@
                         <li>
                             <a href="#" class="accordion-toggle">Clientes<span class="arrow">&#9660;</span></a>
                             <ul class="submenu">
-                                <li><a href="#">Clientes</a></li>
+                                <li><a href="{% url 'cliente' %}">Clientes</a></li>
                                 <li><a href="#">Evolución</a></li>
                             </ul>
                         </li>

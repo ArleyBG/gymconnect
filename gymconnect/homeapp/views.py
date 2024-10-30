@@ -39,6 +39,35 @@ def home(request):
         'search': search
     })
     
+def register_huella(request):
+    user_data = None
+    search = False
+    
+    if request.method == 'GET':
+        búsqueda = request.GET.get('buscar', '').strip()
+        
+        if búsqueda:
+            search = True
+            try:
+                user = Administrador.objects.get(name=búsqueda)
+                user_data = {
+                    'id': user.id,
+                    'Nombre': user.name,
+                    'CC': user.identification,
+                    'Correo': user.email,
+                    'Genero': user.gender,
+                    'Cumpleaños': user.date_birth,
+                    'Celular': user.phone
+                }
+            except Administrador.DoesNotExist:
+                user_data = None
+    
+    return render(request, 'home/registro_huella.html', {
+        'title': 'Registro de huella',
+        'user_data': user_data,
+        'search': search,
+    })
+    
 def empleado(request):
     
     if request.method == 'POST':
@@ -111,6 +140,21 @@ def eliminar_empleado(request, id):
     empleado.delete()
     messages.success(request, 'Empleado eliminado')
     return redirect('empleado')
+
+def cliente(request):
+    # Crear una función para buscar un cliente
+    # Crear el modelo y el formulario para el cliente
+    
+    return render(request, 'home/datos_cliente.html', {
+        'title': 'Clientes',
+    })
+
+def asistencia(request):
+    # Función para mostrar la lista de asistencia
+    
+    return render(request, 'home/inicio.html', {
+        'title': 'Asistencia'
+    })
 
 
                 

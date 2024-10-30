@@ -131,4 +131,4 @@ AUTH_USER_MODEL = 'mainapp.Administrador'
 AUTHENTICATION_BACKENDS = ['mainapp.backends.CustomBackend']
 
 # Clave API google
-GOOGLE_API_KEY = 'AIzaSyB0gPF1XTfTVQKoxtjw9Re8MUGzT7uIO4s'
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
