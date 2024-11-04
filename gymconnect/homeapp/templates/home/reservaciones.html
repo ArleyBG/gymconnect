@@ -1,0 +1,47 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title}}
+{% endblock %}
+
+{% block content %}
+    <h3 class="list">Reservaciones</h3>
+    <form class="buscar" method="get" action="{% url 'buscar_reserva' %}">
+        {% csrf_token %}
+        <input type="text" name="buscar_reserva" placeholder="Buscar cliente por nombre o cédula">
+        <button class="" type="submit">Buscar</button>
+    </form>
+
+    <div class="datos">
+        {% if search %}
+            {% if user_data %}
+                <h3>Datos de reservación</h3>
+                <p>Nombre: {{ user_data.name }}</p>
+                <p>Cedula de ciudadania: {{ user_data.identification }}</p>
+                <p>Correo: {{ user_data.email }}</p>
+                <p>Tipo de reservación: {{ user_data.type_reserve }}</p>
+                <p>Fecha de reservación: {{ user_data.date_reserve }}</p>
+                <p>Hora de reservación: {{ user_data.time_reserve }}</p>
+                <p>Teléfono: {{ user_data.phone }}</p>
+                {% if user_data.name %}
+                    <a class="btn5" href="#">Eliminar reservación</a>
+                    <button class="btn3" type="submit">Actualizar datos</button>
+                {% endif %}
+            {% else %}
+                <p class="messa">¡No se encontró ningún cliente con ese nombre!</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <form class="" id="formularioRegistro" method="post" action="">
+        <h4 class="registro">Realice su reserva</h4>
+        {% csrf_token %}
+        <div class="row">
+            {{ form.as_p }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Reservar</button>
+        </div>
+    </form>
+{% endblock %}

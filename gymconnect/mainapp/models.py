@@ -96,3 +96,51 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.name} {self.last_name}"
     
+class Evolucion(models.Model):
+    name = models.CharField(max_length=50)
+    identification = models.CharField(max_length=20)
+    date_register = models.DateField(auto_now_add=True)
+    peso_corporal = models.DecimalField(max_digits=5, decimal_places=2)
+    estatura = models.DecimalField(max_digits=5, decimal_places=2)
+    imc = models.DecimalField(max_digits=5, decimal_places=2)
+    porcentaje_grasa = models.DecimalField(max_digits=5, decimal_places=2)
+    porcentaje_musculo = models.DecimalField(max_digits=5, decimal_places=2)
+    porcentaje_agua = models.DecimalField(max_digits=5, decimal_places=2)
+    hombros = models.DecimalField(max_digits=5, decimal_places=2)
+    pectoral = models.DecimalField(max_digits=5, decimal_places=2)
+    biceps = models.DecimalField(max_digits=5, decimal_places=2)
+    espalda = models.DecimalField(max_digits=5, decimal_places=2)
+    cintura = models.DecimalField(max_digits=5, decimal_places=2)
+    cadera = models.DecimalField(max_digits=5, decimal_places=2)
+    gluteos = models.DecimalField(max_digits=5, decimal_places=2)
+    pierna = models.DecimalField(max_digits=5, decimal_places=2)
+    pantorrilla = models.DecimalField(max_digits=5, decimal_places=2)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='evoluciones')
+    
+    def __str__(self):
+        return f"{self.cliente}"
+    
+class Reserva(models.Model):
+    TIPO_RESERVE_CHOICES = [
+        ('E', 'Entrenamiento personal'),
+        ('M', 'Membresía'),
+        ('S', 'Spa')
+    ]
+    
+    id = models.AutoField(primary_key=True)
+    identification = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    type_reserve = models.CharField(max_length=50, choices=TIPO_RESERVE_CHOICES)
+    date_register = models.DateField(auto_now_add=True)
+    date_reserve = models.DateField()
+    time_reserve = models.TimeField()
+    phone = models.CharField(max_length=15)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='reservas')
+    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE, related_name='reservas')
+    
+    def __str__(self):
+        return f"{self.id}"
+    
+    
+    

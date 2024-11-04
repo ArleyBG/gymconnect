@@ -1,0 +1,54 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block tittle %} {{title}} {% endblock %}
+
+{% block content %}
+    <h3 class="list">Evoluciones</h3>
+    <form class="buscar" method="get" action="{% url 'buscar_evolucion' %}">
+        {% csrf_token %}
+        <input type="text" name="buscar_evolucion" placeholder="Buscar cliente por nombre o cédula">
+        <button class="" type="submit">Buscar</button>
+    </form>
+    <div class="datos">
+        {% if search_performed %}
+            {% if user_data %}
+                <h3>Datos de evolución</h3>
+                <p>Nombre: {{ user_data.name }}</p>
+                <p>Fecha de registro: {{ user_data.date_register }}</p>
+                <p>Peso: {{ user_data.peso_corporal }}kg</p>
+                <p>Estatura: {{ user_data.estatura }}cm</p>
+                <p>IMC: {{ user_data.imc }}%</p>
+                <p>Porcentage de grasa: {{ user_data.porcentaje_grasa }}%</p>
+                <p>Porcentaje de musculo: {{ user_data.porcentaje_musculo }}%</p>
+                <p>Porecentaje de agua: {{ user_data.porcentaje_agua }}%</p>
+                <p>Hombros: {{ user_data.hombros }}cm</p>
+                <p>Pectoral: {{ user_data.pectoral }}cm</p>
+                <p>Biceps: {{ user_data.biceps }}cm</p>
+                <p>Espalda: {{ user_data.espalda }} cm</p>
+                <p>Cintura: {{ user_data.cintura }} cm</p>
+                <p>Cadera: {{ user_data.cadera }} cm</p>
+                <p>Gluteos: {{ user_data.gluteos }} cm</p>
+                <p>Pierna: {{ user_data.pierna }} cm</p>
+                <p>Pantorrilla: {{ user_data.pantorrilla }} cm</p>
+                {% if user_data.name %}
+                    <a class="btn5" href="#">Eliminar evolucion</a>
+                    <button class="btn3" type="submit">Actualizar datos</button>
+                {% endif %}
+            {% else %}
+                <p class="messa">¡No se encontró ningún cliente con ese nombre!</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <form class="" id="formularioRegistro" method="post" action="">
+        <h4 class="registro">Registrar evolución</h4>
+        {% csrf_token %}
+        <div class="row">
+            {{form}}
+        </div>
+        <div>
+            <button class="btn" type="submit">Registrar</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <h3 class="list">{{ title }}</h3>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Cédula</th>
+                    <th>Email</th>
+                    <th>Genero</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Celular</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.last_name }}</td>
+                        <td>{{ client.identification }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.gender }}</td>
+                        <td>{{ client.date_birth }}</td>
+                        <td>{{ client.phone }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+                    

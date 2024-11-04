@@ -20,17 +20,20 @@
         <img src="{% static 'images/logo1.png' %}" alt="logo de Gymconnect" title="GYMCONNECT"> 
         <a href="{% url 'inicio' %}"><h1>GYMCONNECT</h1></a>
     </div>
-
     <nav>
         <ul class="main">
+            {% comment %}
             <li>
                 <a href="#"><i class="fa-solid fa-gear"></i></a>
                 <ul class="submain">
+                {% endcomment %}
                     <li>
                         <a href="{% url 'index' %}">Salir</a>
                     </li>
+                {% comment %}
                 </ul>
             </li>
+            {% endcomment %}
         </ul>
     </nav>
 </header>
@@ -61,7 +64,6 @@
                             <ul class="submenu">
                                 <li><a href="{% url 'registro_huella' %}">Ingreso por huella dactilar</a></li>
                                 <li><a href="{% url 'empleado' %}">Empleados</a></li>
-                                <li><a href="{% url 'cliente' %}">Clientes</a></li>
                                 <li><a href="{% url 'inicio' %}">Asistencia</a></li> {# Aquí se redirige a la página de inicio por el momento #}
                             </ul>
                         </li>
@@ -70,8 +72,9 @@
                         <li>
                             <a href="#" class="accordion-toggle">Clientes<span class="arrow">&#9660;</span></a>
                             <ul class="submenu">
-                                <li><a href="{% url 'cliente' %}">Clientes</a></li>
-                                <li><a href="#">Evolución</a></li>
+                                <li><a href="{% url 'cliente' %}">Añadir clientes</a></li>
+                                <li><a href="{% url 'list_client' %}">Lista de clientes</a></li>
+                                <li><a href="{% url 'evolucion' %}">Evolución</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -95,7 +98,7 @@
                         <li>
                             <a href="#" class="accordion-toggle">Reservaciones<span class="arrow">&#9660;</span></a>
                             <ul class="submenu">
-                                <li><a href="#">Clases</a></li>
+                                <li><a href="{% url 'reservaciones' %}">Clases</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <form class="buscar" method="GET" action="">
+    <form class="buscar" method="GET" action="{% url 'buscar_cliente' %}">
         <h3>{{ title }}</h3>
         {% csrf_token %}
         <input type="text" name="buscar_cliente" placeholder="Buscar cliente por nombre o cédula">
@@ -21,13 +21,10 @@
                 <p>Email: {{ user_data.email }}</p>
                 <p>Genero: {{ user_data.gender }}</p>
                 <p>Fecha de nacimiento: {{ user_data.date_birth }}</p>
-                <p>Ocupacion: {{ user_data.occupation }}</p>
-                <p>Salario: {{ user_data.payment }}</p>
                 <p>Celular: {{ user_data.phone }}</p>
                 {% if user_data.id %}
-                    <a class="btn5" href="#">Eliminar empleado</a>
+                    <a class="btn5" href="#">Eliminar cliente</a>
                     <button class="btn3" type="submit">Actualizar datos</button>
-                    <a href="#" class="btn4">Registrar Cliente</a>
                 {% endif %}
             {% else %}
                 <p class="messa">¡No se encontró ningún cliente con ese nombre!</p>
@@ -41,7 +38,21 @@
         {% endfor %}
     {% endif %}
 
+    
+    {% comment %}
     <div class="btns">
-        <a href="#" class="btn4" onclick="mostrarFormulario()">Registrar empleado</a>
+        <a href="#" class="btn4" onclick="mostrarFormulario()">Registrar cliente</a>
     </div>
+    {% endcomment %}
+
+    <form method="post" id="formularioRegistro" class"formulario-oculto" action="">
+        <h4 class="registro">Registrar cliente</h4>
+        {% csrf_token %}
+        <div class="row">
+            {{ form }}
+        </div>
+        <div class="btn-form">
+            <button class="btn" type="submit">Registrar</button>
+        </div>
+    {# Crear formulario para guardar los clientes #}
 {% endblock %}
